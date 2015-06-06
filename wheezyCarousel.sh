@@ -61,7 +61,7 @@ echo $INSTPKG
 apt-get -y upgrade
 export DEBIAN_FRONTEND=noninteractive; apt-get -y install $INSTPKG
 #For wheezy only 
-export DEBIAN_FRONTEND=noninteractive; apt-get -y install -t wheezy-backports $INSTPKG
+#export DEBIAN_FRONTEND=noninteractive; apt-get -y install -t wheezy-backports $INSTPKG
 apt-get -y clean
 
 
