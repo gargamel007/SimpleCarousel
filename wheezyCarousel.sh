@@ -36,18 +36,9 @@ apt-get install console-data
 
 
 # Setup apt-sources
-#sourcesFile="/etc/apt/sources.list"
-#rm $sourcesFile
-#touch $sourcesFile
 #Get all info running : sudo netselect-apt -a armhf -n -s -c fr jessie
 # Or : sudo netselect-apt -a armhf -n -s -c fr wheezy
-#Edit output file to add wheezy updates and uncomment security + backports
-#echo "# Debian packages for wheezy" >> $sourcesFile                                                                                            
-#echo "deb http://debian.mirrors.ovh.net/debian/ wheezy main contrib non-free" >> $sourcesFile
-#echo "deb http://debian.mirrors.ovh.net/debian/ wheezy-updates main contrib non-free" >> $sourcesFile
-#echo "#Security updates for stable" >> $sourcesFile
-#echo "deb http://security.debian.org/ stable/updates main contrib non-free" >> $sourcesFile
-#echo "deb http://ftp.debian.org/debian/ wheezy-backports main contrib non-free" >> $sourcesFile
+echo "deb http://ftp.debian.org/debian/ wheezy-backports main contrib non-free" >> /etc/apt/sources.list
 
 apt-get update
 
@@ -60,10 +51,9 @@ INSTPKG+=" lightdm x11vnc iceweasel"
 echo $INSTPKG
 apt-get -y upgrade
 export DEBIAN_FRONTEND=noninteractive; apt-get -y install $INSTPKG
-#For wheezy only 
-#export DEBIAN_FRONTEND=noninteractive; apt-get -y install -t wheezy-backports $INSTPKG
+#For wheezy only
+export DEBIAN_FRONTEND=noninteractive; apt-get -y install -t wheezy-backports $INSTPKG
 apt-get -y clean
-
 
 #Add new user
 useradd -m -U -d /home/$USERNAME -s /bin/bash $USERNAME
@@ -108,7 +98,7 @@ mkdir -p /home/$USERNAME/.config/openbox
 echo "xhost +localhost &" > /home/$USERNAME/.config/openbox/autostart #enable remote access
 echo "setxkbmap fr &" >> /home/$USERNAME/.config/openbox/autostart
 echo "xterm -e '/sbin/ifconfig eth0 && read a' &" >> /home/$USERNAME/.config/openbox/autostart
-echo "xset -dpms &" >> /home/$USERNAME/.config/openbox/autostart                                                                                                                                   
+echo "xset -dpms &" >> /home/$USERNAME/.config/openbox/autostart
 echo "xset s noblank;xset s 0 0;xset s off" >> /home/$USERNAME/.config/openbox/autostart
 echo "x11vnc -nap -wait 50 -noxdamage -rfbauth /home/$USERNAME/.vnc_passwd -display :0 -auth /home/$USERNAME/.Xauthority -forever -o /tmp/x11vnc.log -bg &" >> /home/$USERNAME/.config/openbox/autostart
 chown -R $USERNAME:$USERNAME /home/$USERNAME/.config/openbox/autostart
@@ -141,7 +131,7 @@ crontab tmpcron && rm tmpcron
 #Turn Off Screen
 #export DISPLAY=":0.0"; xset dpms force off
 #Turn On Screen
-#reboot 
+#reboot
 
 
 #For rpi2 (some commands need root others don't)
