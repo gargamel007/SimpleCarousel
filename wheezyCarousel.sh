@@ -71,7 +71,9 @@ useradd -m -U -d /home/$USERNAME -s /bin/bash $USERNAME
 # Do NOT force password change upon first login as it will prevent autologin :(
 adduser $USERNAME sudo
 #Disable Sshd root login
-sed -e "s/PermitRootLogin no/PermitRootLogin yes/g" -i /etc/ssh/sshd_config
+sed -e "s/PermitRootLogin yes/PermitRootLogin no/g" -i /etc/ssh/sshd_config
+sed -e "s/#PermitRootLogin yes/PermitRootLogin no/g" -i /etc/ssh/sshd_config
+sed -e "s/#PermitRootLogin no/PermitRootLogin no/g" -i /etc/ssh/sshd_config
 
 # Install RAMLOG - No ramlog in Jessie
 #dpkg -i /tmp/ramlog_2.0.0_all.deb
