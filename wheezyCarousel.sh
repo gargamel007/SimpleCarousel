@@ -36,18 +36,19 @@ apt-get install console-data
 
 
 # Setup apt-sources
-sourcesFile="/etc/apt/sources.list"
-rm $sourcesFile
-touch $sourcesFile
+#sourcesFile="/etc/apt/sources.list"
+#rm $sourcesFile
+#touch $sourcesFile
 #Get all info running : sudo netselect-apt -a armhf -n -s -c fr jessie
 # Or : sudo netselect-apt -a armhf -n -s -c fr wheezy
 #Edit output file to add wheezy updates and uncomment security + backports
-echo "# Debian packages for wheezy" >> $sourcesFile                                                                                            
-echo "deb http://debian.mirrors.ovh.net/debian/ wheezy main contrib non-free" >> $sourcesFile
-echo "deb http://debian.mirrors.ovh.net/debian/ wheezy-updates main contrib non-free" >> $sourcesFile
-echo "#Security updates for stable" >> $sourcesFile
-echo "deb http://security.debian.org/ stable/updates main contrib non-free" >> $sourcesFile
-echo "deb http://ftp.debian.org/debian/ wheezy-backports main contrib non-free" >> $sourcesFile
+#echo "# Debian packages for wheezy" >> $sourcesFile                                                                                            
+#echo "deb http://debian.mirrors.ovh.net/debian/ wheezy main contrib non-free" >> $sourcesFile
+#echo "deb http://debian.mirrors.ovh.net/debian/ wheezy-updates main contrib non-free" >> $sourcesFile
+#echo "#Security updates for stable" >> $sourcesFile
+#echo "deb http://security.debian.org/ stable/updates main contrib non-free" >> $sourcesFile
+#echo "deb http://ftp.debian.org/debian/ wheezy-backports main contrib non-free" >> $sourcesFile
+
 apt-get update
 
 # Install packages
@@ -55,7 +56,7 @@ INSTPKG="hdparm hddtemp console-setup console-data netselect-apt"
 INSTPKG+=" bash-completion parted cpufrequtils unzip mosh"
 INSTPKG+=" vim tmux htop sudo locate tree ncdu toilet figlet git mosh"
 INSTPKG+=" xorg ttf-mscorefonts-installer openbox xterm xinit obconf xscreensaver xscreensaver-gl menu obmenu"
-INSTPKG+=" lightdm iceweasel x11vnc"
+INSTPKG+=" lightdm x11vnc iceweasel"
 echo $INSTPKG
 apt-get -y upgrade
 export DEBIAN_FRONTEND=noninteractive; apt-get -y install $INSTPKG
